@@ -13,7 +13,7 @@ const Navbar = () => {
     localStorage.removeItem('token');
 
     // Redirect to the login page
-    navigate('/login');
+    navigate('/');
     window.location.reload();
   };
   

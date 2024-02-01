@@ -58,7 +58,7 @@ const RegistrationPage = () => {
                 />
                 <button type='submit'>Submit</button>
                 <p>Already registered?
-                    <Link to='/login'>
+                    <Link to='/'>
                         Login here
                     </Link>
                 </p>

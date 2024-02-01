@@ -25,7 +25,7 @@ function App() {
         <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
           <Route
-            path='/login'
+            path='/'
             element={<LoginPage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}
           />
           <Route
@@ -45,7 +45,7 @@ function App() {
             </>
           ) : (
             // Redirect to login if not logged in
-            <Route path='*' element={<Navigate to='/login' />} />
+            <Route path='*' element={<Navigate to='/' />} />
           )}
         </Routes>
       </BrowserRouter>
