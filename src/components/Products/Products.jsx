@@ -7,12 +7,13 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
+  const backendApi ='https://qurinom-backend-cc6y.onrender.com'
 
   useEffect(() => {
     // Fetch products from your backend route
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:8000/products');
+        const response = await fetch(`${backendApi}/products`);
         const data = await response.json();
         setProducts(data);
       } catch (error) {
@@ -31,7 +32,7 @@ const Products = () => {
   const handleDelete = async (productId) => {
     try {
       // Make a DELETE request to your backend to delete the product
-      const response = await axios.delete(`http://localhost:8000/products/${productId}`, {
+      const response = await axios.delete(`${backendApi}/products/${productId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -70,7 +71,7 @@ const Products = () => {
           <div key={index} className="product-card">
             {product.image && (
               <img
-                src={`http://localhost:8000/uploads/${product.image}`}
+                src={`${backendApi}/uploads/${product.image}`}
                 alt={product.title}
               />
             )}

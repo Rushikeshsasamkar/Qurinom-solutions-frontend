@@ -4,8 +4,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Loginpage.css'
 
+
+
+
 const Loginpage = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
+  const backendApi ='https://qurinom-backend-cc6y.onrender.com'
+  // const backendApi='https://qurinom-solutions-banckend.vercel.app/'
 
   const [loginData, setLoginData] = useState({
     username: '',
@@ -15,7 +20,7 @@ const Loginpage = ({ setIsLoggedIn }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/login', loginData);
+      const response = await axios.post(`${backendApi}/login`, loginData);
       const { success, token, message } = response.data;
 
       if (success) {
@@ -28,11 +33,13 @@ const Loginpage = ({ setIsLoggedIn }) => {
         console.log('Login successful');
       } else {
         console.log(message);
+        
       }
 
       navigate('/products');
     } catch (err) {
       console.log(err);
+      window.alert("Enter the correct UserId / Password");
     }
 
     setLoginData({

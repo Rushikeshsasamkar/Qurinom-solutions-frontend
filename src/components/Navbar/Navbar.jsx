@@ -1,10 +1,12 @@
 // Navbar.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link,useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
   const navigate = useNavigate();
+
+  
 
   const handleLogout = () => {
     // Remove the token from local storage
@@ -12,7 +14,9 @@ const Navbar = () => {
 
     // Redirect to the login page
     navigate('/login');
+    window.location.reload();
   };
+  
   return (
     <div className="navbar">
       <Link to='/login'>Login</Link>

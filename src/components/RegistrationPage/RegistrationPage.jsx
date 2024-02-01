@@ -4,7 +4,10 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './RegistrationPage.css'
 
+
 const RegistrationPage = () => {
+    const backendApi ='https://qurinom-backend-cc6y.onrender.com'
+    // const backendApi='https://qurinom-solutions-banckend.vercel.app/'
     const navigate = useNavigate();
     const [registration, setRegistration] = useState({
         username: '',
@@ -21,13 +24,15 @@ const RegistrationPage = () => {
 
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/register', registration);
+            const response = await axios.post(`${backendApi}/register`, registration);
             console.log(response.data);
             navigate('/login')
+            window.alert("User registered sucessfully")
 
         }
         catch (err) {
             console.error(err);
+
         }
 
         setRegistration({

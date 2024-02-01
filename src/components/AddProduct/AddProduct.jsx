@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './AddProduct.css'
 
+
+
 const AddProduct = ({ onAddProduct, products }) => {
+  const backendApi ='https://qurinom-backend-cc6y.onrender.com'
   const [productData, setProductData] = useState({
     title: '',
     description: '',
@@ -37,7 +40,7 @@ const AddProduct = ({ onAddProduct, products }) => {
 
       // Include the token in the headers of the Axios request
       const response = await axios.post(
-        'http://localhost:8000/addproduct',
+        `${backendApi}/addproduct`,
         formData,
         {
           headers: {

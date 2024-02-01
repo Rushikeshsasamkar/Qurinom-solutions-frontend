@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const UpdateProfile = () => {
+  const backendApi ='https://qurinom-backend-cc6y.onrender.com'
   const [userData, setUserData] = useState({
     username: '',
     password: '',
@@ -12,7 +13,7 @@ const UpdateProfile = () => {
     const fetchUserData = async () => {
       try {
         // Fetch user details based on the authentication token
-        const response = await axios.get('http://localhost:8000/updateprofile', {
+        const response = await axios.get(`${backendApi}/updateprofile`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
@@ -39,7 +40,7 @@ const UpdateProfile = () => {
   
     try {
       // Make a PUT request to update the user profile
-      const response = await axios.put('http://localhost:8000/updateprofile', userData, {
+      const response = await axios.put(`${backendApi}/updateprofile`, userData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },

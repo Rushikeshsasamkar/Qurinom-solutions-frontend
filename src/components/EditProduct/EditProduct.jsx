@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+const backendApi ='https://qurinom-backend-cc6y.onrender.com'
 
 const EditProduct = () => {
   const { productId } = useParams();
@@ -17,7 +18,7 @@ const EditProduct = () => {
     console.log('Fetching product details...');
     const fetchProductDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/products/${productId}`);
+        const response = await axios.get(`${backendApi}/products/${productId}`);
         console.log('Response:', response.data);
         setProductData(response.data);
       } catch (error) {
@@ -60,7 +61,7 @@ const EditProduct = () => {
       formData.append('image', productData.image); // Append the image file to the form data
 
       // Make a PUT request to update the product
-      const response = await axios.put(`http://localhost:8000/editproduct/${productId}`, formData, {
+      const response = await axios.put(`${backendApi}/editproduct/${productId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -118,7 +119,7 @@ const EditProduct = () => {
         </label>
         <br />
         <label>
-          Previous Image: {productData.image && <img src={`http://localhost:8000/uploads/${productData.image}`} alt="Previous" style={{ maxWidth: '100px' }} />}
+          Previous Image: {productData.image && <img src={`${backendApi}/uploads/${productData.image}`} alt="Previous" style={{ maxWidth: '100px' }} />}
         </label>
         <br />
         <label>
