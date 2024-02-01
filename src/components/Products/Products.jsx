@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './Products.css'
+
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -47,31 +49,32 @@ const Products = () => {
     }
   };
 
-  return (
-    <div>
-      <h2>Products</h2>
-      <Link to='/addproduct'><h1>Add new Product</h1></Link>
+  return (<>
+  <h1>Products</h1>
+    <div className="product-container">
+      
 
-      <ul>
-        {products.map((product, index) => (
-          <li key={index}>
+      {products.map((product, index) => (
+        <div key={index} className="product-card">
+          {product.image && (
+            <img
+              src={`http://localhost:8000/uploads/${product.image}`}
+              alt={product.title}
+            />
+          )}
+          <div className="product-details">
             <h3>{product.title}</h3>
             <p>Description: {product.description}</p>
             <p>Price: ₹ {product.price}</p>
-            {product.image && (
-              <img
-                src={`http://localhost:8000/uploads/${product.image}`}
-                alt={product.title}
-                style={{ maxWidth: '100px' }} // Set the maximum width as needed
-              />
-            )}
-            <button onClick={() => handleEdit(product._id)}>Edit</button>
-            &nbsp;
-            <button onClick={() => handleDelete(product._id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+          </div>
+          <div className="product-actions">
+            <button className="edit" onClick={() => handleEdit(product._id)}>Edit</button>
+            <button className="delete" onClick={() => handleDelete(product._id)}>Delete</button>
+          </div>
+        </div>
+      ))}
     </div>
+    </>
   );
 };
 
