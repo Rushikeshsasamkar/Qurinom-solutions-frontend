@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './Products.css'
-
+import './Products.css';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,32 +49,48 @@ const Products = () => {
     }
   };
 
-  return (<>
-  <h1>Products</h1>
-    <div className="product-container">
-      
+  // Filter products based on the search term
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-      {products.map((product, index) => (
-        <div key={index} className="product-card">
-          {product.image && (
-            <img
-              src={`http://localhost:8000/uploads/${product.image}`}
-              alt={product.title}
-            />
-          )}
-          <div className="product-details">
-            <h3>{product.title}</h3>
-            <p>Description: {product.description}</p>
-            <p>Price: ₹ {product.price}</p>
+  return (
+    <div className='outer-div'>
+      <h1>Products</h1>
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+      <div className="product-container">
+        {filteredProducts.map((product, index) => (
+          <div key={index} className="product-card">
+            {product.image && (
+              <img
+                src={`http://localhost:8000/uploads/${product.image}`}
+                alt={product.title}
+              />
+            )}
+            <div className="product-details">
+              <h3 className='title'>{product.title}</h3>
+              <p className='description'><span style={{ fontWeight: 'bold' }}>Description: </span>{product.description}</p>
+              <p className='price'>Price: ₹ {product.price}</p>
+            </div>
+            <div className="product-actions">
+              <button className="edit" onClick={() => handleEdit(product._id)}>
+                Edit
+              </button>
+              <button className="delete" onClick={() => handleDelete(product._id)}>
+                Delete
+              </button>
+            </div>
           </div>
-          <div className="product-actions">
-            <button className="edit" onClick={() => handleEdit(product._id)}>Edit</button>
-            <button className="delete" onClick={() => handleDelete(product._id)}>Delete</button>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
-    </>
   );
 };
 
