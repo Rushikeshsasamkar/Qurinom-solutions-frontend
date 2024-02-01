@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './AddProduct.css'
+import {useNavigate} from 'react-router-dom'
 
 
 
 const AddProduct = ({ onAddProduct, products }) => {
+  const navigate = useNavigate();
   const backendApi ='https://qurinom-backend-cc6y.onrender.com'
   const [productData, setProductData] = useState({
     title: '',
@@ -63,6 +65,7 @@ const AddProduct = ({ onAddProduct, products }) => {
     }
 
     window.alert('Product added!');
+    navigate('/products');
 
     // Clear the form fields
     setProductData({

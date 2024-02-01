@@ -32,12 +32,16 @@ const Products = () => {
   const handleDelete = async (productId) => {
     try {
       // Make a DELETE request to your backend to delete the product
+      
       const response = await axios.delete(`${backendApi}/products/${productId}`, {
+        
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
+       
       });
-
+      window.alert('Product Deleted!')
+      
       // Check if the product was deleted successfully
       if (response.status === 200) {
         console.log('Product Deleted!');
